@@ -19,18 +19,38 @@ fi
 
 export VAULT_ADDR VAULT_TOKEN TF_VAR_postgres_admin_password
 
-# Best-effort Kubernetes auth reviewer material when cluster context exists.
+# Provide Kubernetes auth reviewer material when the lab context exists.
 if kubectl --context "${KIND_CONTEXT}" get ns vault >/dev/null 2>&1; then
-  SA_SECRET_NAME="$(kubectl --context "${KIND_CONTEXT}" -n vault get sa vault -o jsonpath='{.secrets[0].name}' 2>/dev/null || true)"
-  if [ -n "${SA_SECRET_NAME}" ]; then
-    TF_VAR_token_reviewer_jwt="$(kubectl --context "${KIND_CONTEXT}" -n vault get secret "${SA_SECRET_NAME}" -o jsonpath='{.data.token}' 2>/dev/null | base64 --decode || true)"
-    TF_VAR_kubernetes_ca_cert="$(kubectl --context "${KIND_CONTEXT}" -n vault get secret "${SA_SECRET_NAME}" -o jsonpath='{.data.ca\.crt}' 2>/dev/null | base64 --decode || true)"
-    export TF_VAR_token_reviewer_jwt TF_VAR_kubernetes_ca_cert
+  TF_VAR_kubernetes_ca_cert="$(kubectl --context "${KIND_CONTEXT}" -n vault get configmap kube-root-ca.crt -o jsonpath='{.data.ca\.crt}' 2>/dev/null || true)"
+  if [ -z "${TF_VAR_kubernetes_ca_cert}" ]; then
+    TF_VAR_kubernetes_ca_cert="$(kubectl --context "${KIND_CONTEXT}" get configmap -n kube-system kube-root-ca.crt -o jsonpath='{.data.ca\.crt}' 2>/dev/null || true)"
+  fi
+  # Prefer TokenRequest API (Kubernetes 1.24+ no longer auto-creates SA secrets).
+  TF_VAR_token_reviewer_jwt="$(kubectl --context "${KIND_CONTEXT}" -n vault create token vault --duration=24h 2>/dev/null || true)"
+  if [ -n "${TF_VAR_kubernetes_ca_cert}" ]; then
+    export TF_VAR_kubernetes_ca_cert
+  fi
+  if [ -n "${TF_VAR_token_reviewer_jwt}" ]; then
+    export TF_VAR_token_reviewer_jwt
   fi
 fi
 
 cd "${TF_DIR}"
 terraform init -input=false
+
+# If a prior seed or manual enable already created mounts, adopt them into state
+# so apply stays idempotent for lab reruns.
+if ! terraform state list 2>/dev/null | grep -q 'module.vault_config.vault_mount.kv$'; then
+  if vault secrets list -format=json 2>/dev/null | grep -q '"secret/"'; then
+    terraform import -input=false module.vault_config.vault_mount.kv secret || true
+  fi
+fi
+if ! terraform state list 2>/dev/null | grep -q 'module.vault_config.vault_mount.database$'; then
+  if vault secrets list -format=json 2>/dev/null | grep -q '"database/"'; then
+    terraform import -input=false module.vault_config.vault_mount.database database || true
+  fi
+fi
+
 terraform apply -auto-approve -input=false
 
 echo "Vault configuration applied."

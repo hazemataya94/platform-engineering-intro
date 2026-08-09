@@ -37,8 +37,8 @@ variable "postgres_admin_password" {
 }
 
 variable "dynamic_credential_ttl" {
-  type    = string
-  default = "1h"
+  type    = number
+  default = 3600
 }
 
 variable "kubernetes_host" {

@@ -29,9 +29,9 @@ variable "postgres_admin_password" {
 }
 
 variable "dynamic_credential_ttl" {
-  type        = string
-  description = "Default TTL for dynamic database credentials."
-  default     = "1h"
+  type        = number
+  description = "Default TTL in seconds for dynamic database credentials."
+  default     = 3600
 }
 
 variable "kubernetes_host" {
