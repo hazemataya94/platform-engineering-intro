@@ -6,13 +6,15 @@ These docs support a hands-on Platform Engineering Introduction lab on a local `
 
 ## How To Navigate
 
-1. Start with the [Demo Guide](demo-guide.md) — theory → lab → theory → lab.
-2. Use [Architecture](architecture.md) when you want the full component map.
-3. Use [Fundamentals](fundamentals/README.md) or [Runbooks](runbooks/README.md) only as supporting indexes.
+1. For the talk: open [Presentation](presentation/README.md) (`slides.md` or `slides.html`).
+2. For the lab: start with the [Demo Guide](demo-guide.md) — theory → lab → theory → lab.
+3. Use [Architecture](architecture.md) when you want the full component map.
+4. Use [Fundamentals](fundamentals/README.md) or [Runbooks](runbooks/README.md) only as supporting indexes.
 
 ## Documentation Index
 
-- [Demo Guide](demo-guide.md) (primary path)
+- [Presentation](presentation/README.md) (Marp + Reveal slides)
+- [Demo Guide](demo-guide.md) (primary lab path)
 - [Architecture](architecture.md)
 - [Fundamentals](fundamentals/README.md)
 - [Runbook Index](runbooks/README.md)

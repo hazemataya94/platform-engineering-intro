@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Platform Engineering in Practice</title>
+    <meta name="description" content="Platform Engineering Introduction session slides" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/white.css" />
+    <link rel="stylesheet" href="./hape-reveal-light.css" />
+  </head>
+  <body>
+    <a
+      class="hape-brand-logo"
+      href="https://hapesolutions.com"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="HAPE Solutions home"
+    >
+      <img src="./assets/hape-logo-light.png" alt="HAPE Solutions" width="140" height="32" />
+    </a>
+
+    <div class="reveal">
+      <div class="slides">
+        <section class="center-slide">
+          <h1>Platform Engineering in Practice</h1>
+          <p><strong>Hazem Ataya</strong></p>
+          <p class="muted">Founder, HAPE Solutions</p>
+        </section>
+
+        <section>
+          <h2>Background</h2>
+          <ul>
+            <li><strong>10+</strong> years in software engineering</li>
+            <li><strong>7+</strong> years in leadership and management</li>
+            <li><strong>2</strong> patents at the European Patent Office</li>
+            <li>Scaled <strong>2</strong> startups: Medicus AI and Innoscripta Group</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Hazem Ataya</h2>
+          <ul class="compact-list">
+            <li>Started in computer vision with Objective-C and Swift</li>
+            <li>Full-stack development (frontend and backend), including PHP Yii2</li>
+            <li>C++ developer, then C++ tech lead</li>
+            <li>DevOps team lead; also CI/CD engineer and release manager roles</li>
+            <li>Product owner for a public cloud — built the team and delivered a proof of concept in one year</li>
+            <li>Head of DevOps and Platform Engineering</li>
+            <li>Founder, HAPE Solutions</li>
+          </ul>
+        </section>
+
+        <section class="center-slide">
+          <h2>HAPE Solutions</h2>
+          <p>Platform engineering products for software delivery</p>
+          <p>
+            <a href="https://hapesolutions.com/about" target="_blank" rel="noopener noreferrer">hapesolutions.com/about</a>
+          </p>
+        </section>
+
+        <section class="center-slide">
+          <h2>Today's Question</h2>
+          <blockquote>
+            <p><strong>How do we make good engineering practices easy to follow at scale?</strong></p>
+          </blockquote>
+        </section>
+
+        <section class="dense-slide">
+          <h2>DevOps ≠ Tools</h2>
+          <p class="muted">Kubernetes, Terraform, Jenkins, GitLab CI, Prometheus, Vault…</p>
+          <p>Those tools <strong>support</strong> DevOps.</p>
+          <p>
+            DevOps is a <strong>culture</strong> and a way of work that enables the software engineer to
+            <strong>own the full lifecycle</strong> of the software product.
+          </p>
+          <blockquote>
+            <p>
+              <strong>“You build it, you run it.”</strong>
+            </p>
+            <p class="muted">Werner Vogels, CTO of Amazon (2006)</p>
+          </blockquote>
+        </section>
+
+        <section>
+          <h2>Flow → Feedback → Learning</h2>
+          <p>These are the <strong>principles of DevOps</strong> (the Three Ways).</p>
+          <ol>
+            <li><strong>Flow</strong> — idea to production with less friction</li>
+            <li><strong>Feedback</strong> — know quickly what works or breaks</li>
+            <li><strong>Learning</strong> — improve the system from what happened</li>
+          </ol>
+          <p>
+            Source:
+            <a
+              href="https://www.oreilly.com/library/view/the-devops-handbook/9781098182281/"
+              target="_blank"
+              rel="noopener noreferrer"
+              >The DevOps Handbook</a
+            >
+            (O’Reilly)
+          </p>
+        </section>
+
+        <section>
+          <h2>The Complexity Problem</h2>
+          <p>That ownership principle is valuable.</p>
+          <p class="muted">Unnecessary cognitive load is not.</p>
+          <blockquote>
+            <p>How much a software engineer need to know before they can safely run a software product?</p>
+          </blockquote>
+        </section>
+
+        <section class="dense-slide">
+          <h2>Platform as a Product</h2>
+          <p>Development teams are the users of the platform.</p>
+          <blockquote>
+            <p>What is slowing engineers down?</p>
+          </blockquote>
+          <blockquote>
+            <p>What are they repeatedly asking us to do?</p>
+          </blockquote>
+          <p><span class="accent">Support queue → platform roadmap</span></p>
+        </section>
+
+        <section>
+          <h2>Request → Capability</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Repeated request</th>
+                <th>Capability</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Check my CPU / memory / traffic</td>
+                <td>Developer Grafana</td>
+              </tr>
+              <tr>
+                <td>Check my logs</td>
+                <td>Loki via Grafana</td>
+              </tr>
+              <tr>
+                <td>Change my deployment</td>
+                <td>Git-controlled overlays</td>
+              </tr>
+              <tr>
+                <td>Change a secret</td>
+                <td>Vault</td>
+              </tr>
+              <tr>
+                <td>Access the database</td>
+                <td>Dynamic short-lived credentials</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section>
+          <h2>Controlled Self-Service</h2>
+          <p>Self-service ≠ unrestricted cluster access</p>
+          <ul>
+            <li>Git as the controlled change interface</li>
+            <li>Vault for secrets and dynamic DB credentials</li>
+            <li><strong>Terraform configures</strong> the system</li>
+            <li><strong>Vault protects</strong> secret material</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Three Layers of the Platform</h2>
+          <ol>
+            <li><strong>Visibility</strong> — Prometheus, Grafana, Loki, alerts</li>
+            <li><strong>Controlled self-service</strong> — Git, Vault, dynamic credentials</li>
+            <li><strong>Standardization</strong> — Helm golden paths, Terraform modules</li>
+          </ol>
+        </section>
+
+        <section>
+          <h2>Golden Path vs Guardrail</h2>
+          <ul>
+            <li><strong>Golden path</strong> — the easy, recommended way (e.g. backend / frontend charts)</li>
+            <li>
+              <strong>Guardrail</strong> — non-negotiable safety (private DBs, no long-lived secrets in git, auditable
+              change)
+            </li>
+          </ul>
+          <blockquote>
+            <p>Platform Engineering removes <strong>unnecessary</strong> responsibility — not ownership.</p>
+          </blockquote>
+        </section>
+
+        <section>
+          <h2>Live Demo</h2>
+          <p>Local <code>kind</code> lab that mirrors this story.</p>
+          <p>Pattern: <strong>theory → runbook</strong> for each beat.</p>
+          <p>Operator checklist: <a href="../demo-guide.md">Demo Guide</a></p>
+          <p class="muted">Commands live in the runbooks — not on these slides.</p>
+        </section>
+
+        <section>
+          <h2>Takeaways</h2>
+          <ol>
+            <li>Start with developer problems, not platform tools</li>
+            <li>Repeated requests are signals</li>
+            <li>Self-service needs boundaries</li>
+            <li>Standardize repeated engineering decisions</li>
+            <li>Encode security into the path</li>
+          </ol>
+        </section>
+
+        <section>
+          <h2>Discussion</h2>
+          <ol>
+            <li>What is the most annoying repeated step between writing code and production?</li>
+            <li>What do developers currently need to ask another team to do?</li>
+            <li>Which rule exists only as documentation, but could become automation?</li>
+          </ol>
+          <p>
+            <span class="accent">Framework:</span> Does it repeat? → Standardize? → Automate? → Self-service? → What
+            guardrails?
+          </p>
+        </section>
+
+        <section class="center-slide thank-you-slide">
+          <h2>Thank You</h2>
+          <div class="thank-you-grid">
+            <div>
+              <p>Stay connected</p>
+              <p>
+                <a
+                  href="https://www.linkedin.com/in/hazem-ataya-29849b151/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >linkedin.com/in/hazem-ataya-29849b151</a
+                >
+              </p>
+              <p class="muted">Scan the QR code to open LinkedIn</p>
+            </div>
+            <div class="qr-wrap">
+              <a
+                href="https://www.linkedin.com/in/hazem-ataya-29849b151/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Open Hazem Ataya on LinkedIn"
+              >
+                <img
+                  src="./assets/linkedin-qr.png"
+                  alt="QR code linking to Hazem Ataya LinkedIn profile"
+                  width="360"
+                  height="360"
+                />
+              </a>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+    <script>
+      Reveal.initialize({
+        hash: true,
+        slideNumber: true,
+        controls: true,
+        progress: true,
+        transition: "fade",
+      });
+    </script>
+  </body>
+</html>
