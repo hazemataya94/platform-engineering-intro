@@ -1,0 +1,28 @@
+name: sample-frontend
+namespace: platform-apps
+
+image:
+  repository: platform-engineering-sample-frontend
+  tag: local
+  pullPolicy: IfNotPresent
+
+replicaCount: 1
+
+service:
+  port: 80
+  targetPort: 80
+
+containerPort: 80
+
+resources:
+  requests:
+    cpu: 25m
+    memory: 64Mi
+  limits:
+    memory: 128Mi
+
+probes:
+  enabled: true
+  path: /healthz
+
+podLabels: {}

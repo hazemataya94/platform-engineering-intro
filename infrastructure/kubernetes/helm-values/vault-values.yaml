@@ -1,0 +1,37 @@
+global:
+  enabled: true
+  tlsDisable: true
+
+injector:
+  enabled: true
+  resources:
+    requests:
+      cpu: 50m
+      memory: 64Mi
+    limits:
+      memory: 128Mi
+
+server:
+  # Teaching-friendly simplified mode for local kind labs.
+  dev:
+    enabled: true
+    # Local-lab only root token. Never reuse outside this teaching cluster.
+    devRootToken: "root"
+  standalone:
+    enabled: false
+  ha:
+    enabled: false
+  resources:
+    requests:
+      cpu: 50m
+      memory: 128Mi
+    limits:
+      memory: 256Mi
+  service:
+    type: ClusterIP
+
+ui:
+  enabled: true
+
+csi:
+  enabled: false

@@ -1,0 +1,43 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: support-requests-dashboard
+  namespace: monitoring
+  labels:
+    grafana_dashboard: "1"
+    app.kubernetes.io/part-of: platform-engineering-session
+data:
+  support-requests-dashboard.json: |
+    {
+      "title": "Support Requests As Roadmap Signals",
+      "uid": "platform-support-requests",
+      "timezone": "browser",
+      "schemaVersion": 39,
+      "version": 1,
+      "panels": [
+        {
+          "type": "timeseries",
+          "title": "Support request rate by type",
+          "gridPos": {"h": 10, "w": 24, "x": 0, "y": 0},
+          "datasource": {"type": "prometheus", "uid": "prometheus"},
+          "targets": [
+            {
+              "expr": "sum(rate(platform_support_requests_total[1m])) by (type)",
+              "legendFormat": "{{type}}"
+            }
+          ]
+        },
+        {
+          "type": "stat",
+          "title": "Total support requests",
+          "gridPos": {"h": 6, "w": 24, "x": 0, "y": 10},
+          "datasource": {"type": "prometheus", "uid": "prometheus"},
+          "targets": [
+            {
+              "expr": "sum(platform_support_requests_total)",
+              "legendFormat": "total"
+            }
+          ]
+        }
+      ]
+    }

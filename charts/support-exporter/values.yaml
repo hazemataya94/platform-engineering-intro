@@ -1,0 +1,33 @@
+name: support-metrics-exporter
+namespace: platform-apps
+
+image:
+  repository: platform-engineering-support-metrics-exporter
+  tag: local
+  pullPolicy: IfNotPresent
+
+replicaCount: 1
+
+service:
+  port: 80
+  targetPort: 8080
+
+containerPort: 8080
+
+resources:
+  requests:
+    cpu: 25m
+    memory: 64Mi
+  limits:
+    memory: 128Mi
+
+probes:
+  enabled: true
+  path: /healthz
+
+serviceMonitor:
+  enabled: true
+  path: /metrics
+  interval: 15s
+
+podLabels: {}

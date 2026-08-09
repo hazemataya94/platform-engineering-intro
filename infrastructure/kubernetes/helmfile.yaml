@@ -1,0 +1,69 @@
+helmDefaults:
+  createNamespace: true
+  wait: true
+  timeout: 600
+
+repositories:
+  - name: prometheus-community
+    url: https://prometheus-community.github.io/helm-charts
+  - name: grafana
+    url: https://grafana.github.io/helm-charts
+  - name: hashicorp
+    url: https://helm.releases.hashicorp.com
+
+releases:
+  - name: kube-prometheus-stack
+    namespace: monitoring
+    chart: prometheus-community/kube-prometheus-stack
+    version: 87.10.1
+    labels:
+      stack: monitoring
+    values:
+      - ./helm-values/kube-prometheus-stack-values.yaml
+
+  - name: loki
+    namespace: logging
+    chart: grafana/loki
+    version: 6.55.0
+    labels:
+      stack: logging
+    values:
+      - ./helm-values/loki-values.yaml
+
+  - name: promtail
+    namespace: logging
+    chart: grafana/promtail
+    version: 6.16.6
+    labels:
+      stack: logging
+    needs:
+      - logging/loki
+    values:
+      - ./helm-values/promtail-values.yaml
+
+  - name: postgres
+    namespace: platform-data
+    chart: ../../charts/postgres
+    labels:
+      stack: data
+    values:
+      - ../../charts/postgres/values.yaml
+
+  - name: adminer
+    namespace: platform-data
+    chart: ../../charts/adminer
+    labels:
+      stack: data
+    needs:
+      - platform-data/postgres
+    values:
+      - ../../charts/adminer/values.yaml
+
+  - name: vault
+    namespace: vault
+    chart: hashicorp/vault
+    version: 0.29.1
+    labels:
+      stack: security
+    values:
+      - ./helm-values/vault-values.yaml

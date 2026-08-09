@@ -1,0 +1,12 @@
+# Example overlay values for the frontend golden-path chart.
+# Use with:
+#   helm upgrade --install sample-frontend ./charts/frontend -f cicd/deployment-config/sample-frontend-values.yaml
+
+replicaCount: 2
+
+resources:
+  requests:
+    cpu: 25m
+    memory: 64Mi
+  limits:
+    memory: 128Mi

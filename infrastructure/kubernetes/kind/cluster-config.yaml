@@ -1,0 +1,14 @@
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+name: platform-engineering
+nodes:
+  - role: control-plane
+    image: kindest/node:v1.35.1
+  - role: worker
+    labels:
+      lab.platform-engineering.local/node-role: workloads
+    image: kindest/node:v1.35.1
+  - role: worker
+    labels:
+      lab.platform-engineering.local/node-role: platform
+    image: kindest/node:v1.35.1

@@ -1,0 +1,35 @@
+# Example GitLab CI pipeline for the Platform Engineering Introduction lab.
+# This file is intentionally named *.example.yml so it is not an active pipeline.
+# It shows the idea of validation before applying golden-path chart overlays.
+
+stages:
+  - validate
+  - plan
+
+variables:
+  HELM_CHART_BACKEND: charts/backend
+  HELM_CHART_FRONTEND: charts/frontend
+  BACKEND_VALUES: cicd/deployment-config/sample-backend-values.yaml
+  FRONTEND_VALUES: cicd/deployment-config/sample-frontend-values.yaml
+
+validate:helm-templates:
+  stage: validate
+  image: alpine/helm:3.16.3
+  script:
+    - helm template sample-backend "${HELM_CHART_BACKEND}" -f "${BACKEND_VALUES}" >/dev/null
+    - helm template sample-frontend "${HELM_CHART_FRONTEND}" -f "${FRONTEND_VALUES}" >/dev/null
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+
+plan:show-overlays:
+  stage: plan
+  image: alpine/helm:3.16.3
+  script:
+    - echo "Backend overlay values"
+    - cat "${BACKEND_VALUES}"
+    - echo "Frontend overlay values"
+    - cat "${FRONTEND_VALUES}"
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH

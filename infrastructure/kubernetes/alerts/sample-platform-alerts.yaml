@@ -1,0 +1,29 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: sample-platform-alerts
+  namespace: monitoring
+  labels:
+    app.kubernetes.io/name: sample-platform-alerts
+    app.kubernetes.io/part-of: platform-engineering-session
+    release: kube-prometheus-stack
+spec:
+  groups:
+    - name: platform-engineering-session.rules
+      rules:
+        - alert: PlatformSampleBackendDown
+          expr: (sum(up{namespace="platform-apps", service="sample-backend"}) < 1) or absent(up{namespace="platform-apps", service="sample-backend"})
+          for: 1m
+          labels:
+            severity: warning
+          annotations:
+            summary: Sample backend has no healthy scrape targets.
+            description: Prometheus cannot scrape any healthy sample-backend targets in platform-apps.
+        - alert: PlatformSupportRequestsSpike
+          expr: sum(rate(platform_support_requests_total[5m])) > 0.2
+          for: 2m
+          labels:
+            severity: info
+          annotations:
+            summary: Support-request signal rate is elevated.
+            description: The synthetic support-request metric is showing sustained activity. Use this as a teaching cue for roadmap discovery.

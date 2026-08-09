@@ -1,0 +1,25 @@
+name: postgres
+namespace: platform-data
+
+image:
+  repository: postgres
+  tag: "17-alpine"
+  pullPolicy: IfNotPresent
+
+replicaCount: 1
+
+service:
+  port: 5432
+
+auth:
+  database: platform
+  username: platform
+  # Local-lab only password. Do not reuse outside this teaching cluster.
+  password: platform-local-password
+
+resources:
+  requests:
+    cpu: 50m
+    memory: 256Mi
+  limits:
+    memory: 512Mi

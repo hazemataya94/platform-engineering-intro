@@ -1,0 +1,22 @@
+name: adminer
+namespace: platform-data
+
+image:
+  repository: adminer
+  tag: "5-standalone"
+  pullPolicy: IfNotPresent
+
+replicaCount: 1
+
+service:
+  port: 8080
+
+# Local-lab default server hostname for the Postgres service in this lab.
+defaultServer: postgres.platform-data.svc.cluster.local
+
+resources:
+  requests:
+    cpu: 25m
+    memory: 64Mi
+  limits:
+    memory: 128Mi

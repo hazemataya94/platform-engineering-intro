@@ -1,0 +1,6 @@
+apiVersion: v2
+name: postgres
+description: Lab PostgreSQL chart using postgres:17-alpine.
+type: application
+version: 0.1.0
+appVersion: "17"
