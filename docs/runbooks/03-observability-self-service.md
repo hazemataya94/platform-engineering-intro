@@ -2,11 +2,13 @@
 
 ## Purpose
 
-Install logging and dashboards so developers can investigate without asking another team for every metrics or logs question.
+Install logging and dashboards so you can investigate without asking another team for every metrics or logs question.
 
 ## Prerequisites
 
-- Monitoring stack from runbook 01 is installed.
+- Read [Observability Self-Service](../fundamentals/03-observability-self-service.md).
+- Monitoring stack from [Runbook 01](01-bring-up-demo.md) is installed.
+- Sample apps from [Runbook 02](02-helm-golden-path.md) are recommended so dashboards have live targets.
 
 ## Steps
 
@@ -38,3 +40,7 @@ kubectl --context kind-platform-engineering -n monitoring get configmap -l grafa
 make dashboard-down
 make logging-down
 ```
+
+## Next
+
+Continue with [Secure Self-Service](../fundamentals/04-secure-self-service.md).

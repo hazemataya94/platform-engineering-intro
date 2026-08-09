@@ -19,7 +19,8 @@ loki:
 singleBinary:
   replicas: 1
   persistence:
-    enabled: false
+    enabled: true
+    size: 1Gi
   resources:
     requests:
       memory: 256Mi
@@ -43,6 +44,13 @@ chunksCache:
 
 resultsCache:
   enabled: false
+
+lokiCanary:
+  enabled: false
+
+sidecar:
+  rules:
+    enabled: false
 
 monitoring:
   dashboards:

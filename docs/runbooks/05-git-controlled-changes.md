@@ -6,9 +6,10 @@ Show how overlay values on golden-path charts act as a controlled delivery inter
 
 ## Prerequisites
 
-- Local Helm available
-- Charts under `charts/backend` and `charts/frontend`
-- Optional: running `kind` cluster `platform-engineering` if you want to apply
+- Read [Git As A Platform Interface](../fundamentals/05-git-as-platform-interface.md).
+- Local Helm available.
+- Charts under `charts/backend` and `charts/frontend`.
+- Optional: running `kind` cluster `platform-engineering` if you want to apply.
 
 ## Steps
 
@@ -61,3 +62,7 @@ If you applied overlays and want chart defaults again:
 make backend-up
 make frontend-up
 ```
+
+## Next
+
+Continue with [Feedback Loops And Alerts](../fundamentals/06-feedback-loops-and-alerts.md).

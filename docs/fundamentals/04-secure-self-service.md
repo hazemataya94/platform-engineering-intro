@@ -20,3 +20,7 @@ Explain how platforms encode security into reusable capabilities.
 ## Takeaway
 
 Security and developer experience improve together when guardrails are part of the path.
+
+## Next
+
+Continue with [Runbook 04 — Vault And Dynamic Credentials](../runbooks/04-vault-and-dynamic-credentials.md).

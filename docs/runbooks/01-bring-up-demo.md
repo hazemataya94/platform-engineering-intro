@@ -6,6 +6,7 @@ Create the local `kind` cluster and install the monitoring foundation.
 
 ## Prerequisites
 
+- Read [Visibility As A Platform Capability](../fundamentals/01-visibility-as-platform-capability.md).
 - A local Docker runtime is running.
 - Tools from `make check-prereqs` are installed.
 
@@ -45,3 +46,7 @@ kubectl --context kind-platform-engineering -n monitoring get pods
 ```bash
 make clean
 ```
+
+## Next
+
+Continue with [Golden Paths Intro](../fundamentals/02-golden-paths-intro.md).

@@ -6,8 +6,8 @@ Deploy sample workloads through opinionated Helm charts.
 
 ## Prerequisites
 
-- Monitoring stack is installed.
-- Logging stack is recommended so logs appear in Grafana.
+- Read [Golden Paths Intro](../fundamentals/02-golden-paths-intro.md).
+- Monitoring stack from [Runbook 01](01-bring-up-demo.md) is installed.
 
 ## Steps
 
@@ -50,3 +50,7 @@ Inspect chart defaults:
 ```bash
 make apps-down
 ```
+
+## Next
+
+Continue with [Observability Self-Service](../fundamentals/03-observability-self-service.md).

@@ -4,7 +4,7 @@
 
 Explain why Git is part of the platform, not only a source-control tool.
 
-## Teaching Point
+## Main Idea
 
 Self-service does not mean every engineer has unrestricted cluster write access.
 
@@ -38,3 +38,7 @@ The GitLab example validates Helm templates and shows overlay contents.
 It is an example for learning.
 
 It is not required to run for the live demo.
+
+## Next
+
+Continue with [Runbook 05 — Git-Controlled Changes](../runbooks/05-git-controlled-changes.md).

@@ -25,15 +25,17 @@ It shows how good engineering practices become easier to follow at scale by enco
 
 ## Quick Start
 
-Run all commands from the repository root.
+Follow the alternating theory → lab path in [`docs/demo-guide.md`](docs/demo-guide.md).
+
+That guide is the primary walkthrough. Do not use the command blocks below as a second competing path; they are only a compressed reminder after you understand the beats.
 
 ```bash
 make check-prereqs
 make kind-up
 make monitoring-preload-images
 make monitoring-up
-make logging-up
 make apps-up
+make logging-up
 make dashboard-up
 make data-up
 make vault-up
@@ -44,33 +46,14 @@ Open `http://localhost:3000` and sign in with `admin` / `admin`.
 
 These credentials are only for the local `kind` lab.
 
-For Vault and dynamic credentials after Vault is up:
-
-```bash
-make vault-ui
-export VAULT_ADDR=http://127.0.0.1:8200
-export VAULT_TOKEN=root
-make vault-configure
-make vault-seed-demo-secrets
-make demo-db-credentials
-make adminer-port-forward
-```
-
-Optional extras:
-
-```bash
-make alerts-up
-# Review cicd/ for Git-as-interface overlays and the GitLab CI example
-```
-
 If image pulls into the kind nodes fail because of local network or IPv6 issues, keep using `make monitoring-preload-images` before `make monitoring-up`.
 
 ## Documentation
 
-1. [`docs/architecture.md`](docs/architecture.md)
-2. [`docs/demo-guide.md`](docs/demo-guide.md)
-3. [`docs/runbooks/README.md`](docs/runbooks/README.md)
-4. [`docs/fundamentals/README.md`](docs/fundamentals/README.md)
+1. [`docs/demo-guide.md`](docs/demo-guide.md) — start here (theory → lab)
+2. [`docs/architecture.md`](docs/architecture.md)
+3. [`docs/fundamentals/README.md`](docs/fundamentals/README.md)
+4. [`docs/runbooks/README.md`](docs/runbooks/README.md)
 5. [`docs/README.md`](docs/README.md)
 
 ## Cleanup

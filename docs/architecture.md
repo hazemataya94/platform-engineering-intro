@@ -4,6 +4,8 @@
 
 This document explains the local architecture for the Platform Engineering Introduction lab.
 
+For the learning sequence, start with [Demo Guide](demo-guide.md) (theory → lab).
+
 ## Component Topology
 
 ```mermaid
@@ -73,7 +75,7 @@ sequenceDiagram
 - `terraform/` configures Vault capabilities and does not store application secret values.
 - `cicd/` owns example GitLab CI and Helm overlay values for learning.
 - `infrastructure/kubernetes/alerts/` owns sample PrometheusRules.
-- `docs/demo-guide.md` owns the live demo walkthrough.
+- `docs/demo-guide.md` owns the primary theory → lab walkthrough.
 
 ## Chart Compatibility
 

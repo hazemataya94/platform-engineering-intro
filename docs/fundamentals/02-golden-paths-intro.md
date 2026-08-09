@@ -20,3 +20,7 @@ It standardizes the repeated decisions that every team would otherwise reinvent.
 ## Takeaway
 
 Standardize where standardization creates value. Preserve choice where workloads legitimately differ.
+
+## Next
+
+Continue with [Runbook 02 — Helm Golden Path](../runbooks/02-helm-golden-path.md).

@@ -2,20 +2,21 @@
 
 ## Purpose
 
-Configure Vault, seed a demo application secret, and request dynamic PostgreSQL credentials.
+Bring up Postgres and Vault, configure Vault, seed a demo application secret, and request dynamic PostgreSQL credentials.
 
 ## Prerequisites
 
-- Cluster is running.
-- `make data-up` and `make vault-up` have been applied.
+- Read [Secure Self-Service](../fundamentals/04-secure-self-service.md).
+- Cluster is running from earlier runbooks.
 - `vault` and `terraform` CLIs are installed.
-- Vault is port-forwarded: `make vault-ui`
 
 ## Steps
 
 From the repository root:
 
 ```bash
+make data-up
+make vault-up
 make vault-ui
 ```
 
@@ -43,6 +44,12 @@ Local-lab Postgres values:
 - Database: `platform`
 - Username/password: either the static lab bootstrap user, or dynamic credentials from `make demo-db-credentials`
 
+Then redeploy the backend so Vault Agent Injector can render the secret:
+
+```bash
+make backend-up
+```
+
 ## Expected Outcomes
 
 - Terraform configures KV, database engine, policies, and Kubernetes auth role.
@@ -64,3 +71,7 @@ Do not commit real secrets.
 make vault-down
 make data-down
 ```
+
+## Next
+
+Continue with [Git As A Platform Interface](../fundamentals/05-git-as-platform-interface.md).
