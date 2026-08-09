@@ -105,6 +105,22 @@ def healthz() -> dict[str, str]:
     return {"status": "ok"}
 
 
+@app.get("/app-secret")
+def app_secret() -> dict[str, Any]:
+    """Lab-only: reveal the Vault-injected app secret so learners can verify delivery.
+
+    Do not copy this pattern to real applications.
+    """
+    secret = _load_app_secret()
+    if secret is None:
+        raise HTTPException(status_code=503, detail="vault app secret not available")
+    return {
+        "path": str(APP_SECRET_FILE),
+        "api_token": secret,
+        "warning": "local-lab demo only; never expose secrets over HTTP in real systems",
+    }
+
+
 @app.get("/work")
 def work() -> dict[str, Any]:
     event_type = random.choice(("signup", "checkout", "search"))

@@ -8,11 +8,11 @@ Bring up Postgres and Vault, configure Vault, seed a demo application secret, an
 
 - Read [Secure Self-Service](../fundamentals/04-secure-self-service.md).
 - Cluster is running from earlier runbooks.
-- `vault` and `terraform` CLIs are installed.
+- `vault` and `terraform` CLIs are installed, **or** present under `.tools/bin/` in this repository (scripts prepend that path automatically).
 
 ## Steps
 
-From the repository root:
+From the repository root (`hape-academy/sessions/platform-engineering-intro`):
 
 ```bash
 make data-up
@@ -20,7 +20,9 @@ make vault-up
 make vault-ui
 ```
 
-In another terminal:
+If `make vault-up` fails with a MutatingWebhookConfiguration `caBundle` conflict and `kubectl -n vault get pods` already shows `vault-0` and the injector Ready, continue. The release is already usable for the lab.
+
+In another terminal (same repository root):
 
 ```bash
 export VAULT_ADDR=http://127.0.0.1:8200

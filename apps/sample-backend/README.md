@@ -5,6 +5,7 @@ FastAPI service used by the Platform Engineering Introduction lab.
 ## Endpoints
 
 - `GET /healthz` — liveness/readiness probe target; fails closed if Vault secret is required and missing
+- `GET /app-secret` — lab-only: returns the Vault-injected `api_token` value (do not copy to real apps)
 - `GET /work` — synthetic latency and business events
 - `GET /metrics` — Prometheus metrics
 - `GET /` — service metadata, including whether the Vault app secret is present

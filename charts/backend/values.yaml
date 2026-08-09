@@ -37,11 +37,16 @@ serviceMonitor:
 vault:
   enabled: true
   role: sample-backend
+  # Vault KV v2 path (includes /data/ for Agent Injector reads).
   secretPath: secret/data/sample-backend/config
+  # Field name inside that Vault secret (vault kv put ... <secretKey>=...).
+  secretKey: api_token
+  # Filename written under /vault/secrets/ by the injector.
   secretFileName: api_token
+  # How often the Agent sidecar re-renders static KV secrets into the file.
+  staticSecretRenderInterval: 15s
 
 env:
-  APP_SECRET_FILE: /vault/secrets/api_token
   # Set false only for local image bring-up before Vault wiring is ready.
   REQUIRE_APP_SECRET: "true"
 

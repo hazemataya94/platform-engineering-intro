@@ -4,6 +4,11 @@ set -euo pipefail
 # Seed a local-lab application secret into Vault KV.
 # Secret values are provided at runtime and are not committed to git.
 
+ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+if [ -d "${ROOT_DIR}/.tools/bin" ]; then
+  export PATH="${ROOT_DIR}/.tools/bin:${PATH}"
+fi
+
 VAULT_ADDR="${VAULT_ADDR:-http://127.0.0.1:8200}"
 VAULT_TOKEN="${VAULT_TOKEN:-root}"
 SECRET_PATH="${SECRET_PATH:-secret/data/sample-backend/config}"
@@ -11,6 +16,7 @@ APP_API_TOKEN="${APP_API_TOKEN:-platform-demo-api-token}"
 
 if ! command -v vault >/dev/null 2>&1; then
   echo "Error: vault CLI is required for seeding demo secrets."
+  echo "Install vault, or place a binary at ${ROOT_DIR}/.tools/bin/vault"
   exit 1
 fi
 

@@ -8,12 +8,23 @@ ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 TF_DIR="${ROOT_DIR}/terraform/demo"
 KIND_CONTEXT="${KIND_CONTEXT:-kind-platform-engineering}"
 
+# Prefer lab-local CLIs when present (gitignored under .tools/bin).
+if [ -d "${ROOT_DIR}/.tools/bin" ]; then
+  export PATH="${ROOT_DIR}/.tools/bin:${PATH}"
+fi
+
 VAULT_ADDR="${VAULT_ADDR:-http://127.0.0.1:8200}"
 VAULT_TOKEN="${VAULT_TOKEN:-root}"
 TF_VAR_postgres_admin_password="${TF_VAR_postgres_admin_password:-platform-local-password}"
 
 if ! command -v terraform >/dev/null 2>&1; then
   echo "Error: terraform is required."
+  echo "Install terraform, or place a binary at ${ROOT_DIR}/.tools/bin/terraform"
+  exit 1
+fi
+if ! command -v vault >/dev/null 2>&1; then
+  echo "Error: vault CLI is required for mount import checks."
+  echo "Install vault, or place a binary at ${ROOT_DIR}/.tools/bin/vault"
   exit 1
 fi
 
