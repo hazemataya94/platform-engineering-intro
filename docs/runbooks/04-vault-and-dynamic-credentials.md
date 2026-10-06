@@ -12,7 +12,7 @@ Bring up Postgres and Vault, configure Vault, seed a demo application secret, an
 
 ## Steps
 
-From the repository root (`hape-academy/sessions/platform-engineering-intro`):
+From the repository root (`academy/sessions/platform-engineering-intro`):
 
 ```bash
 make data-up

@@ -25,7 +25,7 @@ Slides and speaker notes for the Platform Engineering Introduction session.
 ### Reveal.js (HTML)
 
 ```bash
-cd /Users/hazem/workspace/hape/hape-academy/sessions/platform-engineering-intro/docs/presentation
+cd /Users/hazem/workspace/hape/academy/sessions/platform-engineering-intro/docs/presentation
 open slides.html
 ```
 
